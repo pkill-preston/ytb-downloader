@@ -1,27 +1,31 @@
-const { getInfo } = require('ytdl-getinfo');
-const youtubeMp3Converter = require('youtube-mp3-converter')
+const info = require('./playlist.js')
+const video = require('./videos.js')
 
-
-async function playlistDownloader(url) {
-    const convertLinkToMp3 = youtubeMp3Converter('./songs/')
-
-    const parsedUrl = url.match(/(?<=list=).*?(?=&)|(?<=list=).*/g)
-    await getInfo(url).then(info => {
-        // info.partial is true for playlists
-        if (info.partial) {
-            info.on('video', async v => {
-                try{
-                    console.log('Downloading: ',v.title)
-                    await convertLinkToMp3(v.webpage_url)
-                }catch (e){
-                    console.log(e)
-                }
-            })
-            info.on('done', () => console.log(`Playlist contains ${info.items.length} items.`))
-        }
-    })
+function urlValidator(url){
+    if(url.includes("watch")){
+        return url.match(/(?<=v=).*?(?=&)|(?<=v=).*/g);
+    }else if(url.includes("v=") && url.includes("list=")){
+        return url.match(/(?<=v=).*?(?=&)|(?<=v=).*/g);
+    }else{
+        return url.match(/(?<=list=).*?(?=&)|(?<=list=).*/g);
+    }
 }
 
+async function playlistDownloader(url) {
+    let parsedUrl = urlValidator(url)
+    console.log(parsedUrl)
+    playlist = await info.getInfo(parsedUrl)
+    let index = 0
+    for (let item of playlist.items) {
+        index++
+        try{
+            let title = item.title
+            console.log('Started downloading: ',item.title)
+            await video.videoConvert(item.id,`${item.title}`)
+        }catch (e) {
+            console.log(e)
+        }
+    }
+
+}
 playlistDownloader(process.argv.slice(2)[0])
-
-

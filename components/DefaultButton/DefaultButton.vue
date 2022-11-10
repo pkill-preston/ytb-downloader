@@ -1,12 +1,13 @@
 <template>
-  <button v-bind="$attrs" >{{ text }}</button>
+  <button v-bind="$attrs" @click="action" >{{ text }}</button>
 </template>
 
 <script>
 export default {
   name: 'DefaultButton',
   props: {
-    text: String
+    text: String,
+    action: String
   }
 }
 </script>

@@ -11,8 +11,8 @@
       class="card"
     />
     <div class="buttons wrapper">
-      <button class="button" text="Submit" @click="getURL" />
-      <DefaultButton class="button" text="Submit" @click="getURL" />
+      <DefaultButton class="button" text="Submit" :action="getURL" />
+      <DefaultButton v-if="change === 1" class="button" text="Submit" :action="getURL" />
     </div>
   </div>
 </template>
@@ -32,7 +32,7 @@ export default {
   },
   data () {
     return {
-      variable: 0,
+      change: 0,
       url: '',
       event: {
         title: ''
@@ -48,6 +48,9 @@ export default {
     },
     treatmentURL (url) {
       console.log(url)
+    },
+    created() {
+      this.change = 0
     }
   }
 }
@@ -61,7 +64,8 @@ export default {
   max-height: 36rem;
   height: 100%;
   background-color: #027BCE;
-  border: 1px solid #00487C;
+  border: 5px solid #00487C;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -4,9 +4,15 @@
       <img class="thumbnail" :src="cover" alt="">
     </div>
     <div class="info">
-      <h1 class="text">Title: {{ title }}</h1>
-      <h1 class="text">Videos: {{ videoAmount }}</h1>
-      <h1 class="text">Author: {{ author }}</h1>
+      <h1 class="text">
+        Title: {{ title }}
+      </h1>
+      <h1 class="text">
+        Videos: {{ videoAmount }}
+      </h1>
+      <h1 class="text">
+        Author: {{ author }}
+      </h1>
     </div>
   </div>
 </template>
@@ -17,7 +23,7 @@ export default {
   props: {
     cover: String,
     title: String,
-    videoAmount: String,
+    videoAmount: Number,
     author: String
   }
 }
@@ -27,14 +33,15 @@ export default {
 .container{
   width: 80%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   background-color: white;
   border-radius: 15px;
   overflow: hidden;
 }
 
 .cover{
-  width: 40%;
+  width: 100%;
+  max-width: 40%;
 }
 
 .thumbnail{

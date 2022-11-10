@@ -1,5 +1,6 @@
 export default {
-  getPlaylistInfo ($axios) {
-    return 'a'
+  async getPlaylistInfo ({ commit }, url) {
+    const info = await this.$axios.$get(`/playlist?link=${url}`)
+    commit('setPlaylistInfo', info)
   }
 }

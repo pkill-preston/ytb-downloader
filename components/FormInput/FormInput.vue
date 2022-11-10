@@ -1,9 +1,10 @@
 <template>
   <input
-      :placeholder="placeholder"
-      class="field"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)">
+    :placeholder="placeholder"
+    class="field"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+  >
 </template>
 
 <script>
@@ -30,7 +31,7 @@ export default {
 .field{
   min-height: 1rem;
   height: 100%;
-  max-width: calc(80% - 2rem);
+  max-width: calc(80%);
   width: 100%;
   border: 1px solid black;
   border-radius: 25px;

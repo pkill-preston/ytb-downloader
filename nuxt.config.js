@@ -11,7 +11,7 @@ export default {
   ** See https://nuxtjs.org/api/configuration-head
   */
   head: {
-    title: 'YTBD',
+    title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -27,13 +27,13 @@ export default {
   */
   css: [
   ],
+
   /*
   ** Plugins to load before mounting the App
   ** https://nuxtjs.org/guide/plugins
   */
-  // plugins: [
-  //   '~/plugins/axios.js'
-  // ],
+  plugins: [
+  ],
 
   /*
   ** Auto import components
@@ -57,23 +57,23 @@ export default {
     '@nuxt/http', '@nuxtjs/axios'
   ],
 
+  axios: {
+    baseURL: 'http://localhost:3000/api'
+  },
+
   /*
   ** Server Middleware
   */
-  // serverMiddleware: {
-  //   '/api': '~/api'
-  // },
+  serverMiddleware: {
+    '/api': '~/api'
+  },
 
   /*
   ** For deployment you might want to edit host and port
   */
-  server: {
-    port: 3000, // default: 3000
-    host: 'localhost' // default: localhost
-  },
-
-  // axios: {
-  //   baseURL: 'http://localhost:8080/api'
+  // server: {
+  //  port: 8000, // default: 3000
+  //  host: '0.0.0.0' // default: localhost
   // },
 
   /*

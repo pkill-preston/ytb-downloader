@@ -1,5 +1,5 @@
 <template>
-  <button>{{ text }}</button>
+  <button v-bind="$attrs" >{{ text }}</button>
 </template>
 
 <script>

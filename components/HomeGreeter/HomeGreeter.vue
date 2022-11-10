@@ -1,15 +1,24 @@
 <template>
   <div class="greeter wrapper">
-  <FormInput v-model="event.title" label="Opa" placeholder="Insert your URL here" type="text" />
-    <InfoCard cover="https://i.ytimg.com/vi/LVB2N0bOUi8/hqdefault.jpg?sqp=-oaymwExCNACELwBSFryq4qpAyMIARUAAIhCGAHwAQH4Ac4FgALQBYoCDAgAEAEYaSBpKGkwDw==&rs=AOn4CLBb3gSCi-tFtXSt4rOhWX77n-vmHQ" title=" SET DERRUBA BAILE 😈👽🧨🎭🍃🔥" author="Just Presto" video-amount="59"/>
+    <FormInput ref="inputField" v-model="event.title" label="Opa" placeholder="Insert your URL here" type="text" />
+    <InfoCard
+      v-for="(item, index) in $store.state.playlistInfo[0]"
+      :key="index"
+      :author="item.info.author"
+      :cover="item.info.thumbnail"
+      :title="item.info.title"
+      :video-amount="item.info.size"
+      class="card"
+    />
     <div class="buttons wrapper">
-      <DefaultButton text="Playlist" />
-      <DefaultButton text="Video" />
+      <button class="button" text="Submit" @click="getURL" />
+      <DefaultButton class="button" text="Submit" @click="getURL" />
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import DefaultButton from '@/components/DefaultButton/DefaultButton'
 import FormInput from '@/components/FormInput/FormInput'
 import InfoCard from '@/components/InfoCard/InfoCard'
@@ -28,6 +37,17 @@ export default {
       event: {
         title: ''
       }
+    }
+  },
+  methods: {
+    ...mapActions.getPlaylistInfo,
+    getURL () {
+      this.url = this.$refs.inputField.$el.value
+      this.$store._actions.getPlaylistInfo[0](this.url)
+      console.log(this.url)
+    },
+    treatmentURL (url) {
+      console.log(url)
     }
   }
 }
@@ -49,9 +69,20 @@ export default {
   padding: 1rem;
 }
 
+.card{
+  margin: 2rem 0;
+}
+
+.button{
+  max-width: 60%;
+  width: 100%;
+}
+
 .buttons.wrapper{
   max-width: 20%;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-content: center;
 }
 </style>

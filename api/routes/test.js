@@ -2,8 +2,9 @@ const { Router } = require('express')
 
 const router = Router()
 
-router.get('/test', async (req, res) => {
-  await res.json('Test API!')
+// Test route
+router.use('/test', (req, res) => {
+  res.end('Test API!')
 })
 
 module.exports = router

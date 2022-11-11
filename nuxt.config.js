@@ -58,7 +58,12 @@ export default {
   ],
 
   axios: {
-    baseURL: 'http://localhost:3000/api'
+    baseURL: 'http://localhost:3000/api',
+    proxy: true
+  },
+
+  proxy: {
+    'api/': { pathRewrite: { '~/api/': '' }, changeOrigin: true }
   },
 
   /*

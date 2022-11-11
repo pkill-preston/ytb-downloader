@@ -54,7 +54,7 @@ export default {
   */
   modules: [
     // Doc: https://http.nuxtjs.org
-    '@nuxt/http', '@nuxtjs/axios'
+    '@nuxt/http', '@nuxtjs/axios', '@nuxtjs/proxy'
   ],
 
   axios: {
@@ -63,7 +63,7 @@ export default {
   },
 
   proxy: {
-    'api/': { pathRewrite: { '~/api/': '' }, changeOrigin: true }
+    'api/': { target: 'https://ytb-downloader.vercel.app/', pathRewrite: { '^/api/': '' } }
   },
 
   /*

@@ -63,7 +63,7 @@ export default {
   },
 
   proxy: {
-    'api/': { target: 'https://ytb-downloader.vercel.app/api/', pathRewrite: { '^/api/': '' } }
+    'api/': { target: 'https://ytb-downloader.vercel.app/api/' }
   },
 
   /*

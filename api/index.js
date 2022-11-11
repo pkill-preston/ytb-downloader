@@ -12,7 +12,6 @@ app.use(test)
 app.use(playlist)
 
 // Export express app
-module.exports = app
 
 // Start standalone server if directly running
 if (require.main === module) {
@@ -22,3 +21,5 @@ if (require.main === module) {
     console.log(`API server listening on port ${port}`)
   })
 }
+
+module.exports = app

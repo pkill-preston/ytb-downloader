@@ -7,7 +7,7 @@ export default {
   name: 'DefaultButton',
   props: {
     text: String,
-    action: String
+    action: Function
   }
 }
 </script>

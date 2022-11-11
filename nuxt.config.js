@@ -72,20 +72,11 @@ export default {
   ** For deployment you might want to edit host and port
   */
   server: {
-   port: 3000, // default: 3000
-  },
+    port: 3000 // default: 3000
+  }
 
   /*
   ** Build configuration
   ** See https://nuxtjs.org/api/configuration-build/
   */
-	
-  builds: [
-  {
-    "src": "nuxt.config.js",
-    "use": "@nuxtjs/vercel-builder",
-    "config": {
-      "serverFiles": ["api/**"]
-    }
-  }]
 }

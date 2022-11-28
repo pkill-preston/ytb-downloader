@@ -6,12 +6,6 @@ exports.getInfo = async function getInfo (playlistUrl) {
   const playlistInfo = await axios(`https://youtube.googleapis.com/youtube/v3/playlists?id=${playlistUrl}&key=AIzaSyDidjizx-ASnTOJQy-mnKn-jjcmFkAYtus&part=id,snippet,contentDetails`).then((data) => {
     return { title: data.data.items[0].snippet.title, thumbnail: data.data.items[0].snippet.thumbnails.maxres.url, author: data.data.items[0].snippet.channelTitle, size: data.data.items[0].contentDetails.itemCount }
   })
-  function treatment (string) {
-    string = string.replaceAll('/', '')
-    string = string.replaceAll('|', ' ')
-    string = string.replaceAll('.', ' ')
-    return string
-  }
   playlist.title = playlistInfo.title
   playlist.thumbnail = playlistInfo.thumbnail
   playlist.author = playlistInfo.author
@@ -24,7 +18,7 @@ exports.getInfo = async function getInfo (playlistUrl) {
         data.data.items.forEach((element) => {
           const id = element.contentDetails.videoId
           const etag = element.etag
-          const title = treatment(element.snippet.title)
+          const title = element.snippet.title
           const description = element.snippet.description
           const thumbnail = element.snippet.thumbnails.standard?.url ?? `${element.snippet.title}`
           items.push({

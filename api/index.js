@@ -13,10 +13,12 @@ const corsOptions = {
 // Require API routes
 const test = require('./routes/test')
 const playlist = require('./routes/playlist/index')
+const download = require('./routes/download/index')
 
 // Import API Routes
 app.use(test)
 app.use(playlist)
+app.use(download)
 app.use(cors())
 
 // Export express app

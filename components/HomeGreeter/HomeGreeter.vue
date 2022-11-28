@@ -4,6 +4,7 @@
     <InfoCard
       v-for="(item, index) in $store.state.playlistInfo[0]"
       :key="index"
+      ref="playlistCard"
       :author="item.info.author"
       :cover="item.info.thumbnail"
       :title="item.info.title"
@@ -12,7 +13,7 @@
     />
     <div class="buttons wrapper">
       <DefaultButton class="button" text="Submit" :action="getURL" />
-      <DefaultButton v-if="change === 1" class="button" text="Submit" :action="getURL" />
+      <DefaultButton v-if="change === 1" class="button" text="Download" :action="downloadPlaylist" />
     </div>
   </div>
 </template>
@@ -43,13 +44,27 @@ export default {
     ...mapActions.getPlaylistInfo,
     getURL () {
       this.url = this.$refs.inputField.$el.value
-      this.$store._actions.getPlaylistInfo[0](this.url)
-      console.log(this.url)
+      try {
+        this.$store._actions.getPlaylistInfo[0](this.url)
+        this.change = 1
+      } catch (e) {
+        console.log(e)
+        console.log('deu ruim kkkkkkkkkkkkk')
+      }
     },
-    treatmentURL (url) {
-      console.log(url)
+    downloadPlaylist () {
+      const items = this.$store.state.playlistInfo[0].info.items
+      items.forEach((element) => {
+        const id = element.id
+        const title = element.title
+        try {
+          this.$store._actions.downloadVideo[0]({ title, id })
+        } catch (e) {
+          console.log(e)
+        }
+      })
     },
-    created() {
+    created () {
       this.change = 0
     }
   }

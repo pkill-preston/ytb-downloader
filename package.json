@@ -14,9 +14,15 @@
     "@nuxt/http": "latest",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/vercel-builder": "^0.23.0",
+    "archiver": "^5.3.1",
     "cors": "^2.8.5",
     "express": "latest",
-    "nuxt": "latest"
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "mocha": "^10.1.0",
+    "nuxt": "latest",
+    "youtube-mp3-converter": "^1.0.3",
+    "yt-converter": "^1.3.2"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",

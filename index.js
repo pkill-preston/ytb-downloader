@@ -1,5 +1,5 @@
-const info = require('./playlist.js')
-const video = require('./videos.js')
+const info = require('./getInfo.js')
+const yt = require('yt-converter')
 
 function urlValidator(url){
     if(url.includes("watch")){
@@ -13,19 +13,21 @@ function urlValidator(url){
 
 async function playlistDownloader(url) {
     let parsedUrl = urlValidator(url)
-    console.log(parsedUrl)
     playlist = await info.getInfo(parsedUrl)
-    let index = 0
-    for (let item of playlist.items) {
-        index++
-        try{
-            let title = item.title
-            console.log('Started downloading: ',item.title)
-            await video.videoConvert(item.id,`${item.title}`)
-        }catch (e) {
-            console.log(e)
-        }
+    let index = 1
+    for (let item of playlist.items){
+        yt.getInfo(`https://www.youtube.com/watch?v=${item.id}`).then((info) => {
+            const array = info.formats.find((element, index) => Math.max(element.audioBitrate))
+            console.log('Downolading: ', item.title)
+            console.log(`Item ${index} out of ${playlist.items.length - 1}`)
+            yt.convertAudio({
+                url: `https://www.youtube.com/watch?v=${item.id}`,
+                itag: array.itag,
+                directoryDownload: './songs',
+                title: item.title
+            })
+            index++
+        })
     }
-
 }
 playlistDownloader(process.argv.slice(2)[0])
